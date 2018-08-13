@@ -1,0 +1,8 @@
+# coding=utf-8
+n = input()
+s = set(input().split(" "))
+
+if len(s)==3:
+    print("Three")
+else:
+    print("Four")
