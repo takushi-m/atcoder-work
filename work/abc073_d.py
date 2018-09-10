@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
 from itertools import permutations
 
-inf = 10**30
+inf = 10**7
 n,m,r = map(int, input().split())
 rr = [int(x) for x in input().split()]
-a = []
-b = []
-c = []
 d = [[inf for _ in range(n)] for _ in range(n)]
 for _ in range(m):
     aa,bb,cc = map(int, input().split())
     aa -= 1
     bb -= 1
-    a.append(aa)
-    b.append(bb)
-    c.append(cc)
     d[aa][aa] = 0
     d[bb][bb] = 0
     d[aa][bb] = cc
