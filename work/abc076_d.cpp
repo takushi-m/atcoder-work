@@ -1,9 +1,9 @@
 #include<iostream>
+#include<iomanip>
 #include<vector>
 using namespace std;
 
 int n;
-int T = 0;
 vector<int> t;
 vector<int> v;
 
@@ -19,16 +19,17 @@ double func(double l,double r,double v,double x){
 
 double getv(double x){
   double ret = func(0,0,0,x);
-  ret = min(ret, func(T,T,0,x));
   int tt = 0;
   for(int i=0;i<n;++i){
     ret = min(ret, func(tt,tt+t[i],v[i],x));
     tt += t[i];
   }
+  ret = min(ret, func(tt,tt,0,x));
   return ret;
 }
 
 int main(){
+  int T = 0;
   cin>>n;
   for(int i=0;i<n;++i){
     int tmp;
@@ -50,5 +51,5 @@ int main(){
     double v2 = getv(a2);
     ret += 0.5*0.5*(v1+v2);
   }
-  cout<<ret<<endl;
+  cout<<fixed<<setprecision(15)<<ret<<endl;
 }

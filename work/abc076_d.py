@@ -3,17 +3,7 @@ n = int(input())
 t = list(map(int, input().split()))
 v = list(map(int, input().split()))
 
-n = 100
-t = [200 for _ in range(n)]
-v = [100 for _ in range(n)]
-
 T = sum(t)
-
-eq = [[0,0,0]]
-for i in range(n):
-    c = [eq[i][1],eq[i][1]+t[i],v[i]]
-    eq.append(c)
-eq.append([eq[n][1],eq[n][1],0])
 
 def func(l,r,v,x):
     if x<=l:
@@ -24,13 +14,12 @@ def func(l,r,v,x):
         return v+(x-r)
 
 def getv(x):
-    ret = None
-    for e in eq:
-        v = func(e[0],e[1],e[2],x)
-        if ret is None:
-            ret = v
-        else:
-            ret = min(ret,v)
+    ret = func(0,0,0,x)
+    tt = 0
+    for i in range(n):
+        ret = min(ret, func(tt,tt+t[i],v[i],x))
+        tt += t[i]
+    ret = min(ret, func(tt,tt,0,x))
     return ret
 
 ret = 0
