@@ -4,8 +4,8 @@
 #include<algorithm>
 using namespace std;
 
-typedef ll long long;
-typedef ull unsigned long long;
+typedef long long ll;
+typedef unsigned long long ull;
 
 void sample(){
   vector<vector<int>> vvi = vector<vector<int>>(20, vector<int>(10, 0));  // vvi[20][10]
@@ -16,8 +16,12 @@ void sample(){
   do {
     // pass
   } while(next_permutation(v.begin(), v.end()));
+
+  for(auto x: v){
+    cout<<x<<endl;
+  }
 }
 
-void main(){
-
+int main(){
+  return 42;
 }
