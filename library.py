@@ -84,3 +84,37 @@ class UnionFind():
 
     def same(self, x, y):
         return self.find(x) == self.find(y)
+
+
+"""
+尺取り法
+
+しゃくとり法は
+
+- 「条件」を満たす区間 (連続する部分列) のうち、最小の長さを求める
+- 「条件」を満たす区間 (連続する部分列) のうち、最大の長さを求める
+- 「条件」を満たす区間 (連続する部分列) を数え上げる
+
+といったことを効率良く実現できる。「条件を満たす区間」が以下のいずれかの構造になっている場合には
+しゃくとり法を適用することができる。
+
+- 区間 [left, right) が「条件」を満たすなら、それに含まれる区間も「条件」を満たす
+- 区間 [left, right) が「条件」を満たすなら、それを含む区間も「条件」を満たす
+
+テンプレート
+int right = 0;
+for (int left = 0; left < n; ++left) {
+    while (right < n && (right を 1 個進めたときに条件を満たす)) {
+        /* 実際に right を 1 進める */
+        // ex: sum += a[right];
+        ++right;
+    }
+
+    /* break した状態で right は条件を満たす最大なので、何かする */
+    // ex: res += (right - left);
+
+    /* left をインクリメントする準備 */
+    // ex: if (right == left) ++right;
+    // ex: else sum -= a[left];
+}
+"""
