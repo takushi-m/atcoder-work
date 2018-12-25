@@ -165,5 +165,68 @@ class Test4(unittest.TestCase):
         self.assertEqual(self.f2(n,al), 8)
 
 
+class Test5(unittest.TestCase):
+    # ARC 022 B 細長いお菓子
+    def f(self,n,al):
+        res = 0
+        for l in range(n):
+            for r in range(l+1,n+1):
+                if r-l == len(set(al[l:r])):
+                    res = max(res, r-l)
+        return res
+
+    def f2(self,n,al):
+        res = 0
+        r = 0
+        s = set()
+        for l in range(n):
+            while r<n and al[r] not in s:
+                s.add(al[r])
+                r += 1
+
+            res = max(res, r-l)
+
+            if r==l:
+                r += 1
+            else:
+                s.remove(al[l])
+        return res
+
+    def test(self):
+        n = 7
+        al = [1,2,1,3,1,4,4]
+        self.assertEqual(self.f(n,al), 3)
+        self.assertEqual(self.f2(n,al), 3)
+
+
+class Test7(unittest.TestCase):
+    # ABC 017 D サプリメント
+    def f(self,n,m,fl):
+        L = [0]*(n+1)
+        s = set()
+        r = 0
+        for l in range(n):
+            while r<n and fl[r] not in s:
+                s.add(fl[r])
+                r += 1
+            L[r] = l
+            if r==l:
+                r += 1
+            else:
+                s.remove(fl[l])
+        print(L)
+        dp = [0]*(n+1)
+        dp[0] = 1
+        for i in range(1,n+1):
+            dp[i] = sum(dp[L[i]:i])
+
+        return dp[n]
+
+    def test(self):
+        n = 5
+        m = 2
+        fl = [1,2,1,2,2]
+        self.assertEqual(self.f(n,m,fl), 5)
+
 if __name__ == '__main__':
     unittest.main()
