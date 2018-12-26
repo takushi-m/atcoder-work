@@ -203,18 +203,15 @@ class Test7(unittest.TestCase):
     # ABC 017 D サプリメント
     def f(self,n,m,fl):
         L = [0]*(n+1)
-        s = set()
-        r = 0
-        for l in range(n):
-            while r<n and fl[r] not in s:
-                s.add(fl[r])
-                r += 1
-            L[r] = l
-            if r==l:
-                r += 1
-            else:
-                s.remove(fl[l])
-        print(L)
+        s = [0]*(m+1)
+        l = 0
+        for r in range(n):
+            s[fl[r]] += 1
+            while l<r and s[fl[r]]>1:
+                s[fl[l]] -= 1
+                l += 1
+            L[r+1] = l
+
         dp = [0]*(n+1)
         dp[0] = 1
         for i in range(1,n+1):

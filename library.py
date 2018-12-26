@@ -118,3 +118,20 @@ for (int left = 0; left < n; ++left) {
     // ex: else sum -= a[left];
 }
 """
+
+
+# GCD
+def gcd(a,b):
+    while b!=0:
+        a,b = b,a%b
+    return a
+
+# ax + by = cの整数解を求める
+# cはgcd(a,b)の倍数である必要あり
+# x,y = extGcd(a,b)で「ax+by=gcd(a,b)」が求まるのでc//gcd(a,b)倍する
+def extGcd(a,b):
+    if b==0:
+        return 1, 0
+    y,x = extGcd(b, a%b)
+    y -= a//b * x
+    return x,y
