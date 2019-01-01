@@ -146,6 +146,7 @@ def lower_bound(al, key):
     """
     def isOk(a):
         # alの中でkey以上のアイテムのうち最小のインデックスを返す
+        # upper_boundにする時にはa>key
         return a>=key
 
     ng = -1
