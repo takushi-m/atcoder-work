@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from collections import deque
+
 n,m = map(int, input().split())
 edge = [set() for _ in [0]*n]
 iny = [0 for _ in [0]*n]
@@ -27,9 +29,9 @@ d = [0]*n
 for i in [j for j in range(n) if iny[j]==0]:
     if d[i]>0:
         continue
-    st = [i]
+    st = deque([i])
     while len(st)>0:
-        s = st.pop()
+        s = st.popleft()
         for v in edge[s]:
             if d[v]<d[s]+1:
                 d[v] = d[s]+1

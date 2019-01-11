@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 using namespace std;
 
 int main(){
@@ -18,21 +19,24 @@ int main(){
   }
 
   vector<int> d = vector<int>(n, 0);
-
+  queue<int> st;
   for(int i=0;i<n;i++){
-    if(d[i]>0 || iny[i]>0){
-      continue;
+    if(iny[i]==0){
+      st.push(i);
     }
-    vector<int> st = {i};
-    while(st.size()>0){
-      int s = st.back();
-      st.pop_back();
-      for(int j=0;j<edge[s].size();j++){
-        int v = edge[s][j];
-        if(d[v]<d[s]+1){
-          d[v] = d[s]+1;
-          st.push_back(v);
-        }
+  }
+
+  while(st.size()>0){
+    int s = st.front();
+    st.pop();
+    for(int j=0;j<edge[s].size();j++){
+      int v = edge[s][j];
+      if(iny[v]>0){
+        iny[v]--;
+      }
+      if(iny[v]==0){
+        d[v] = max(d[v], d[s]+1);
+        st.push(v);
       }
     }
   }
