@@ -21,6 +21,9 @@ void sample(){
   for(auto x: v){
     cout<<x<<endl;
   }
+
+  double res = 10.0;
+  cout << fixed << setprecision(10) << res << endl;
 }
 
 int main(){
