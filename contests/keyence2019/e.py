@@ -5,7 +5,7 @@ al = list(map(int, input().split()))
 edge = []
 
 def rec(left, right):
-    if abs(right-left)<=1:
+    if right-left<=1:
         return
 
     mid = (left+right)//2
@@ -21,7 +21,7 @@ def rec(left, right):
     for i in range(mid,right):
         t = al[i] + d*i
         t2 = al[rightmin] + d*rightmin
-        if t2<t:
+        if t<t2:
             rightmin = i
 
     for i in range(left,mid):
@@ -68,7 +68,6 @@ for e in edge:
 
     if uf.same(u,v):
         continue
-    print(e)
     res += w
     uf.unite(v,u)
 
