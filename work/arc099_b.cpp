@@ -1,8 +1,10 @@
 #include<iostream>
 using namespace std;
 
-int S(int n){
-  int res = 0;
+using ll = unsigned long long;
+
+ll S(ll n){
+  ll res = 0;
   while(n>0){
     res += n%10;
     n = n/10;
@@ -10,12 +12,12 @@ int S(int n){
   return res;
 }
 
-bool cmp(int x,int y){
+bool cmp(ll x,ll y){
   return x*S(y)<=y*S(x);
 }
 
-bool check(int n){
-  for(int m=n+1;m<10000000;m++){
+bool check(ll n){
+  for(ll m=n+1;m<10000000;m++){
     if(!cmp(n,m)){
       return false;
     }
@@ -23,31 +25,16 @@ bool check(int n){
   return true;
 }
 
-int log10(int x){
-  int res = -1;
-  while(x>0){
-    res += 1;
-    x /= 10;
-  }
-  return res;
-}
-
 int main(){
-  int before = 0;
-  for(int n=1;n<10000;n++){
-    if(check(n)){
-      cout<<n<<" "<<n-before<<endl;
-      before = n;
-    }
-  }
-  cout<<"---"<<endl;
-  int k= 100;
-  int n = 1;
-  int d = d;
-  for(int i=0;i<k;i++){
-    int x = n+d;
-    int y = n+10*d;
-    if(check(x)){
+  ll k;
+  cin>>k;
+
+  ll n = 0;
+  ll d = 1;
+  for(ll i=0;i<k;i++){
+    ll x = n+d;
+    ll y = n+10*d;
+    if(cmp(x,y)){
       cout<<x<<endl;
       n = x;
     }else{
@@ -55,6 +42,5 @@ int main(){
       d *= 10;
       n = y;
     }
-
   }
 }
