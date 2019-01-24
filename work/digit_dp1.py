@@ -14,8 +14,10 @@ def f(n):
             for d in range(x+1):
                 if j==1 or d<x:
                     dp[i+1][1] += dp[i][j]
+                    dp[i+1][1] %= MOD
                 else:
                     dp[i+1][0] += dp[i][j]
+                    dp[i+1][0] %= MOD
     print(dp)
     return sum(dp[len(n)])
 
