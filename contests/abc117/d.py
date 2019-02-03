@@ -8,8 +8,10 @@ def f(x):
         res += x^a
     return res
 
+# res = 0
 # for x in range(k+1):
-#     print(x,f(x))
+#     res = max(res,f(x))
+# print(res)
 
 cs = []
 mi = 0
@@ -25,6 +27,7 @@ while (1<<mi)<=k:
     cs.append((s0,s1))
     mi += 1
 mi += 1
+
 res = 0
 for idx in range(mi):
     x = 0
@@ -36,6 +39,7 @@ for idx in range(mi):
         else:
             if cs[i][0]>cs[i][1]:
                 x += 1<<i
-    res = max(res, f(x))
+    if x<=k:
+        res = max(res, f(x))
 
 print(res)
