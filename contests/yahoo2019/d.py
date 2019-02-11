@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
 l = int(input())
-odd = [0]
-even = [0]
-for i in range(l):
-    a = int(input())
-    if a%2==1:
-        odd.append(odd[i]+1)
-        even.append(even[i])
+al = [int(input()) for _ in range(l)]
+INF = 10**15
+dp = [INF]*5  # 0,偶数,奇数,偶数,0の状態
+dp[0] = 0
+
+def cost(i, k):
+    # i番目を状態kにした時に必要な回数
+    if k==0 or k==4:
+        return al[i]
+    elif k==1 or k==3:
+        if al[i]>0:
+            return al[i]%2
+        else:
+            return 2
     else:
-        odd.append(odd[i])
-        even.append(even[i]+1)
+        if al[i]%2==0:
+            return 1
+        else:
+            return 0
 
-res = 10**15
-for e in range(l):
-    r = even[e]-even[0]
-    r += odd[l]-odd[e]
-    res = min(res,r)
+for i in range(l):
+    dp2 = [min(dp[:j+1]) for j in range(5)]
+    for j in range(5):
+        dp[j] = dp2[j] + cost(i,j)
 
-for e in range(l-1,-1,-1):
-    r = odd[l]-odd[e]
-    r += even[e]-even[0]
-    res = min(res,r)
+    # for j in range(5):
+    #     for k in range(j,5):
+    #         dp[i+1][k] = min(
+    #             dp[i+1][k],
+    #             dp[i][j] + cost(i, k)
+    #         )
 
-print(res)
+print(min(dp))
