@@ -167,6 +167,13 @@ def gcd(a,b):
         a,b = b,a%b
     return a
 
+# lのGCD
+def gcdlist(l):
+    res = l[0]
+    for i in range(1,len(l)):
+        res = gcd(res, l[i])
+    return res
+
 # ax + by = cの整数解を求める
 # cはgcd(a,b)の倍数である必要あり
 # x,y = extGcd(a,b)で「ax+by=gcd(a,b)」が求まるのでc//gcd(a,b)倍する
