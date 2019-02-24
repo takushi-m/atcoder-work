@@ -186,6 +186,7 @@ def extGcd(a,b):
 
 
 # 二分探索
+### bisect.bisect_leftを使うことも検討する
 def lower_bound(al, key):
     """
     一般に左側が満たしておらず、右側は満たしている判定基準(境目は一つ)ならlower_boundになる
