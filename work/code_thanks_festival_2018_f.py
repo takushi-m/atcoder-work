@@ -12,30 +12,31 @@ for i in range(n):
     edge[p].append(i)
 print(root)
 print(edge)
-def check(ul):
-    used = [False for _ in range(n)]
-    cnt = 0
-    for u in ul:
-        used[u-1] = True
-    if used[root]:
-        if ul[-1]-1 != root:
-            return False
-    for i in range(m-1,-1,-1):
-        v = ul[i]-1
-        st = [(root,1)]
-        while len(st)>0:
-            u,c = st.pop()
-            if u==v:
-                used[u] = False
-                cnt += c
-                break
-            if u not in edge:
-                continue
-            for w in edge[u]:
-                if w==v or not used[w]:
-                    st.append((w,c+1))
-        if used[v]:
-            return False
-    return cnt<=k
 
-print(check([1,3]))
+tree = {}
+tree[root] = ([],1)
+st = [root]
+while len(st)>0:
+    v = st.pop()
+    cnt = tree[v][1]
+    if v not in edge:
+        continue
+    for u in edge[v]:
+        tree[v][0].append(u)
+        if u not in tree:
+            tree[u] = ([],cnt+1)
+        st.append(u)
+
+print(tree)
+
+from itertools import permutations
+
+for l in permutations(range(n), r=m):
+    res = 0
+    for p in l:
+        res += tree[p][1]
+    print(l,res)
+    if res==k:
+        print(*[i+1 for i in l])
+        exit()
+print(-1)
