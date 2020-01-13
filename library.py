@@ -1,3 +1,7 @@
+from itertools import permutations,combinations
+from collections import deque
+from copy import deepcopy
+
 # あまり系
 
 # aのmod Mでの逆元
