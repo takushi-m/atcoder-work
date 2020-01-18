@@ -1,6 +1,7 @@
 from itertools import permutations,combinations
-from collections import deque
+from collections import deque, defaultdict
 from copy import deepcopy
+from operator import itemgetter
 
 # あまり系
 
@@ -218,6 +219,16 @@ def lower_bound(al, key):
             ng = mid
 
     return ok
+
+# 最長増加部分列
+def lis(al):
+    n = len(al)
+    dp = [10**9]*(n+1)
+
+    for a in al:
+        dp[lower_bound(dp, a)] = a
+    print(dp)
+    return lower_bound(dp, 10**9)
 
 # セグメント木
 class SegTree(object):
