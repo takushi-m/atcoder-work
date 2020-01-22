@@ -186,6 +186,15 @@ def gcdlist(l):
         res = gcd(res, l[i])
     return res
 
+def lcm(a,b):
+    return a*b//gcd(a,b)
+
+def lcmlist(l):
+    res = l[0]
+    for x in l[1:]:
+        res = lcm(res, x)
+    return res
+
 # ax + by = cの整数解を求める
 # cはgcd(a,b)の倍数である必要あり
 # x,y = extGcd(a,b)で「ax+by=gcd(a,b)」が求まるのでc//gcd(a,b)倍する
