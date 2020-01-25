@@ -239,7 +239,6 @@ def lis(al):
 
     for a in al:
         dp[lower_bound(dp, a)] = a
-    print(dp)
     return lower_bound(dp, 10**9)
 
 # セグメント木
