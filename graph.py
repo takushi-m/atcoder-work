@@ -18,3 +18,20 @@ def is_bipartite(e,n):
                     if c==col[u]:
                         return False
     return True
+
+# 単一始点最短経路。2地点間ではなく、始点が一つで各点へのコストを計算する
+def dijkstra(e,n,s):
+    inf = 10**18
+    d = [inf]*n
+    d[s] = 0
+
+    q = [(d[s],s)] # priority queueのソートキーが第一要素
+    heapq.heapify([q])
+    while len(q)>0:
+        _,v = heapq.heappop(q)
+        for u,c in e[v]:
+            if d[v]+c>=d[u]:
+                continue
+            d[u] = d[v] + c
+            heapq.heappush(q, (d[u],u))
+    return d
