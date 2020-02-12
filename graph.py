@@ -22,6 +22,8 @@ def is_bipartite(e,n):
 import heapq
 # 単一始点最短経路。2地点間ではなく、始点が一つで各点へのコストを計算する
 # eは隣接リストでe[v] = [(u1,cost1), (u2,cost2)]みたいな形を想定
+# 辺の重みは正である必要がある
+# O(ElogV)
 def dijkstra(e,n,s):
     inf = 10**18
     d = [inf]*n
@@ -38,9 +40,33 @@ def dijkstra(e,n,s):
             heapq.heappush(q, (d[u],u))
     return d
 
+# 単一始点最短経路。2地点間ではなく、始点が一つで各点へのコストを計算する
+# eは隣接リストでe[v] = [(u1,cost1), (u2,cost2)]みたいな形を想定
+# 辺の重みは負でも良い。負の閉路がある場合は第二戻り値でTrueを返す
+# O(VE)
+def bellmanFord(e,n,s):
+    inf = 10**18
+    d = [inf]*n
+    d[s] = 0
+
+    loop = False
+    for i in range(n):
+        updated = False
+        for v in range(n):
+            for u,c in e[v]:
+                if d[v]!=inf and d[u]>d[v]+c:
+                    d[u] = d[v]+c
+                    updated = True
+                    if i==n-1 and u==n-1:
+                        loop = True
+        if not updated:
+            break
+    return d,loop
+
 
 # 最小全域木を求める。unionfindを利用
 # eは隣接リストでe[v] = [(u1,cost1), (u2,cost2)]みたいな形を想定
+# O(ElogV)
 class UnionFind():
     def __init__(self, n):
         self.n = n
