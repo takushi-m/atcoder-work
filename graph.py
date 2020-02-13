@@ -63,6 +63,14 @@ def bellmanFord(e,n,s):
             break
     return d,loop
 
+# 全点対最短路
+# dは隣接行列を想定。d自体を更新する
+def warshallFloyd(d,n):
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                d[i][j] = min(d[i][j], d[i][k]+d[k][j])
+    return d
 
 # 最小全域木を求める。unionfindを利用
 # eは隣接リストでe[v] = [(u1,cost1), (u2,cost2)]みたいな形を想定
