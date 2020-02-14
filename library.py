@@ -206,6 +206,30 @@ def extGcd(a,b):
     y -= a//b * x
     return x,y
 
+def isPrime(x):
+    if x%2==0:
+        return False
+    a = 3
+    while x>=a*a:
+        if x%a==0:
+            return False
+        a += 2
+    return True
+
+def primeFactors(n):
+    res = []
+    while n%2==0:
+        res.append(2)
+        n //= 2
+    x = 3
+    while n>1 and n>=x*x:
+        while n%x==0:
+            res.append(x)
+            n //= x
+        x += 2
+    if n>1:
+        res.append(n)
+    return res
 
 # 二分探索
 ### bisect.bisect_leftを使うことも検討する
