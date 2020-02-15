@@ -231,6 +231,25 @@ def primeFactors(n):
         res.append(n)
     return res
 
+# エラトステネスの篩
+# 配列にはその添字の素因数のうち最小のものが入っている
+def sieve(n):
+    res = list(range(n+10)) # nが小さい時よう
+    res[0] = -1
+    res[1] = -1
+    i = 2
+    while i*i<n:
+        if res[i]<i:
+            i += 1
+            continue
+        j = i*i
+        while j<n:
+            if res[j]==j:
+                res[j] = i
+            j += i
+        i += 1
+    return res
+
 # 二分探索
 ### bisect.bisect_leftを使うことも検討する
 def lower_bound(al, key):
