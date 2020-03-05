@@ -288,12 +288,14 @@ def lis(al):
 # セグメント木
 class SegTree(object):
     """docstring for SegTree."""
-    def __init__(self, l, _n):
+    def __init__(self, l, _n, u, f):
         n = 1
         while n<_n:
             n *= 2
         self.n = n
-        self.dat = [INF for _ in range(2*n)]
+        self.dat = [u for _ in range(2*n)]
+        self.u = u
+        self.f = f
         for i in range(_n):
             self.dat[i+n-1] = l[i]
         self.init(0)
@@ -301,7 +303,7 @@ class SegTree(object):
     def init(self, i):
         if i>=self.n-1:
             return self.dat[i]
-        self.dat[i] = min(
+        self.dat[i] = self.f(
             self.init(self.left(i)),
             self.init(self.right(i))
         )
@@ -321,14 +323,14 @@ class SegTree(object):
         self.dat[i] = x
         while i>0:
             i = self.par(i)
-            self.dat[i] = min(
+            self.dat[i] = self.f(
                 self.dat[self.left(i)],
                 self.dat[self.right(i)]
             )
 
     def q(self,a,b,k,l,r):
         if r<=a or b<=l:
-            return INF
+            return self.u
         if a<=l and r<=b:
             return self.dat[k]
         return min(
