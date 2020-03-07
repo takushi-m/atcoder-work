@@ -286,7 +286,7 @@ def lis(al):
     return lower_bound(dp, 10**9)
 
 # セグメント木
-class SegTree(object):
+class SegTree:
     """docstring for SegTree."""
     def __init__(self, l, _n, u, f):
         n = 1
@@ -340,3 +340,45 @@ class SegTree(object):
 
     def query(self,a,b):
         return self.q(a,b,0,0,self.n)
+
+class BIT:
+    def __init__(self, n):
+        self.n = n
+        self.l = [0]*(n+1)
+
+    def add(self, idx, w):
+        i = idx
+        while i<=self.n:
+            self.l[i] += w
+            i += i&-i
+
+    def sum(self, idx):
+        res = 0
+        i = idx
+        while i>0:
+            res += self.l[i]
+            i -= i&-i
+        return res
+
+    def lower_bound(self, w):
+        if w<=0:
+            return 0
+        idx = 0
+        k = 1
+        while k*2<=self.n:
+            k *= 2
+        while k>0:
+            if idx+k<=self.n and self.l[idx+k]<w:
+                w -= self.l[idx+k]
+                idx += k
+            k //= 2
+        return idx+1
+
+    def pos(self, idx):
+        return self.sum(idx) - self.sum(idx-1)
+
+    def array(self):
+        res = []
+        for i in range(1,self.n+1):
+            res.append(self.pos(i))
+        return res
