@@ -2,6 +2,7 @@ from itertools import permutations,combinations
 from collections import deque, defaultdict
 from copy import deepcopy
 from operator import itemgetter
+from functools import lru_cache
 import heapq
 import sys
 
