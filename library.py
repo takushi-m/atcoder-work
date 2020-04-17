@@ -5,8 +5,8 @@ from operator import itemgetter
 from functools import lru_cache
 import heapq
 import sys
-
 sys.setrecursionlimit(2000)
+from string import ascii_lowercase
 
 # あまり系
 
