@@ -1,4 +1,4 @@
-from itertools import permutations,combinations
+from itertools import permutations,combinations,product
 from collections import deque, defaultdict
 from copy import deepcopy
 from operator import itemgetter
