@@ -27,6 +27,7 @@ import heapq
 def dijkstra(e,n,s):
     inf = 10**18
     d = [inf]*n
+    prev = [s]*n
     d[s] = 0
 
     q = [(d[s],s)] # priority queueのソートキーが第一要素
@@ -37,8 +38,9 @@ def dijkstra(e,n,s):
             if d[v]+c>=d[u]:
                 continue
             d[u] = d[v] + c
+            prev[u] = v
             heapq.heappush(q, (d[u],u))
-    return d
+    return d,prev
 
 # 単一始点最短経路。2地点間ではなく、始点が一つで各点へのコストを計算する
 # eは隣接リストでe[v] = [(u1,cost1), (u2,cost2)]みたいな形を想定
