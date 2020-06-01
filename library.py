@@ -8,6 +8,7 @@ import sys
 sys.setrecursionlimit(2000)
 from string import ascii_lowercase
 from collections import Counter
+from fractions import Fraction
 
 # あまり系
 
