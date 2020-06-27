@@ -237,7 +237,8 @@ def primeFactors(n):
 # エラトステネスの篩
 # 配列にはその添字の素因数のうち最小のものが入っている
 def sieve(n):
-    res = list(range(n+10)) # nが小さい時よう
+    n += 10 # nが小さい時よう
+    res = list(range(n))
     res[0] = -1
     res[1] = -1
     i = 2
@@ -252,6 +253,16 @@ def sieve(n):
             j += i
         i += 1
     return res
+# 以下のような感じでmの約数を数えられる
+l = sieve(n)
+r = 1
+while m!=1:
+    p = l[m]
+    c = 0
+    while l[m]==p:
+        m //= l[m]
+        c += 1
+    r *= c+1
 
 # 二分探索
 ### bisect.bisect_leftを使うことも検討する
