@@ -396,3 +396,24 @@ class BIT:
         for i in range(1,self.n+1):
             res.append(self.pos(i))
         return res
+
+# 巡回セールスマン問題のメモ可再帰版
+# O(2^n*n^2)でn=16くらいまで
+dp = [[-1]*n for _ in range(1<<n)]
+dist = [[0] for _ in range(n)]
+
+def dfs(s,v):
+    if dp[s][v] >= 0:
+        return dp[s][v]
+    
+    if s == (1<<n)-1 and v==0:
+        dp[s][v] = 0
+        return 0
+    
+    ans = 10**18
+    for u in range(n):
+        if not (s>>u & 1):
+            ans = min(ans, dfs(s | 1<<u, u) + dist[v][u])
+        
+    dp[s][v] = ans
+    return ans
